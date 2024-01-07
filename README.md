@@ -1,5 +1,8 @@
 # CozyEnv
 
+[![CI](https://github.com/cozy-elixir/cozy_env/actions/workflows/ci.yml/badge.svg)](https://github.com/cozy-elixir/cozy_env/actions/workflows/ci.yml)
+[![Hex.pm](https://img.shields.io/hexpm/v/cozy_env.svg)](https://hex.pm/packages/cozy_env)
+
 > Helpers for handling OS environment variables.
 
 It helps to provide:
