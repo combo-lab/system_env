@@ -11,7 +11,7 @@ defmodule CozyEnv do
 
   alias CozyEnv.EnvError
 
-  @type data_types ::
+  @type data_type ::
           :boolean
           | :integer
           | :float
@@ -67,7 +67,7 @@ defmodule CozyEnv do
       :billy
 
   """
-  @spec get_env(String.t(), data_types()) :: result()
+  @spec get_env(String.t(), data_type()) :: result()
   def get_env(varname, type)
       when is_binary(varname) and type in @supported_types do
     case System.fetch_env(varname) do
@@ -78,6 +78,9 @@ defmodule CozyEnv do
         nil
     end
   end
+
+  @spec get_env(String.t()) :: String.t()
+  def get_env(varname), do: get_env(varname, :string)
 
   @doc """
   Gets the value of the given environment variable, and casts it into given type.
@@ -112,9 +115,9 @@ defmodule CozyEnv do
       :billy
 
   """
-  @spec fetch_env!(String.t(), data_types(), options()) :: result()
-  def fetch_env!(varname, type, opts \\ [])
-      when is_binary(varname) and type in @supported_types do
+  @spec fetch_env!(String.t(), data_type(), options()) :: result()
+  def fetch_env!(varname, type, opts)
+      when is_binary(varname) and type in @supported_types and is_list(opts) do
     case System.fetch_env(varname) do
       {:ok, value} ->
         apply(__MODULE__, :"to_#{type}", [varname, value])
@@ -135,6 +138,21 @@ defmodule CozyEnv do
 
         raise EnvError, message
     end
+  end
+
+  @spec fetch_env!(String.t(), data_type()) :: result()
+  def fetch_env!(varname, type) when is_binary(varname) and is_atom(type) do
+    fetch_env!(varname, type, [])
+  end
+
+  @spec fetch_env!(String.t(), options()) :: String.t()
+  def fetch_env!(varname, opts) when is_binary(varname) and is_list(opts) do
+    fetch_env!(varname, :string, opts)
+  end
+
+  @spec fetch_env!(String.t()) :: String.t()
+  def fetch_env!(varname) when is_binary(varname) do
+    fetch_env!(varname, :string, [])
   end
 
   @doc false

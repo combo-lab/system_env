@@ -70,6 +70,13 @@ defmodule CozyEnvTest do
     end
   end
 
+  describe "get_env/1" do
+    @tag env: {"VAR", "hello"}
+    test "type defaults to :string" do
+      assert "hello" == CozyEnv.get_env("VAR")
+    end
+  end
+
   describe "fetch_env!/3" do
     test "not set" do
       assert_raise CozyEnv.EnvError,
@@ -140,6 +147,30 @@ defmodule CozyEnvTest do
     @tag env: {"VAR", "hello"}
     test "type - atom" do
       assert :hello == CozyEnv.fetch_env!("VAR", :atom)
+    end
+  end
+
+  describe "fetch_env!/2" do
+    @tag env: {"VAR", "hello"}
+    test "second argument is type" do
+      assert :hello == CozyEnv.fetch_env!("VAR", :atom)
+    end
+
+    test "second argument is options" do
+      assert_raise CozyEnv.EnvError,
+                   "environment variable VAR is missing.\nSet it to something like: ecto://USER:PASS@HOST/DATABASE\n",
+                   fn ->
+                     CozyEnv.fetch_env!("VAR", :boolean,
+                       message: "Set it to something like: ecto://USER:PASS@HOST/DATABASE"
+                     )
+                   end
+    end
+  end
+
+  describe "fetch_env!/1" do
+    @tag env: {"VAR", "hello"}
+    test "type defaults to :string" do
+      assert "hello" == CozyEnv.get_env("VAR")
     end
   end
 end
