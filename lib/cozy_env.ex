@@ -4,7 +4,7 @@ defmodule CozyEnv do
 
   It helps to provide:
 
-    * user friendly error messages
+    * user-friendly error messages
     * ...
 
   """

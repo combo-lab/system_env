@@ -2,6 +2,11 @@
 
 > Helpers for handling OS environment variables.
 
+It helps to provide:
+
+- user-friendly error messages
+- ...
+
 ## Installation
 
 Add `:cozy_env` to the list of dependencies in `mix.exs`:
