@@ -1,21 +1,23 @@
 # CozyEnv
 
-**TODO: Add description**
+> Helpers for handling OS environment variables.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `cozy_env` to your list of dependencies in `mix.exs`:
+Add `:cozy_env` to the list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:cozy_env, "~> 0.1.0"}
+    {:cozy_env, <requirement>}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/cozy_env>.
+## Usage
 
+For more information, see the [documentation](https://hexdocs.pm/cozy_env).
+
+## License
+
+Apache License 2.0

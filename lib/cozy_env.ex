@@ -1,6 +1,12 @@
 defmodule CozyEnv do
   @moduledoc """
   Helpers for handling OS environment variables.
+
+  It helps to provide:
+
+    * user friendly error messages
+    * ...
+
   """
 
   alias CozyEnv.EnvError
@@ -141,6 +147,7 @@ defmodule CozyEnv do
       String.to_integer(value)
     rescue
       ArgumentError ->
+        # credo:disable-for-next-line
         raise EnvError,
               "environment variable #{varname} is provided, but the value " <>
                 "#{inspect(value)} is not the string representation of an integer"
@@ -154,6 +161,7 @@ defmodule CozyEnv do
         float
 
       _ ->
+        # credo:disable-for-next-line
         raise EnvError,
               "environment variable #{varname} is provided, but the value " <>
                 "#{inspect(value)} is not the string representation of a float"
