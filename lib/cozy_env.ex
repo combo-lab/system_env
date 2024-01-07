@@ -43,28 +43,28 @@ defmodule CozyEnv do
 
   ## Examples
 
-     iex> CozyEnv.get_env("NOT_SET", :boolean)
-     nil
+      iex> CozyEnv.get_env("NOT_SET", :boolean)
+      nil
 
-     # export PHX_SERVER=true
-     iex> CozyEnv.get_env("PHX_SERVER", :boolean)
-     true
+      # export PHX_SERVER=true
+      iex> CozyEnv.get_env("PHX_SERVER", :boolean)
+      true
 
-     # export DB_POOL_SIZE=10
-     iex> CozyEnv.get_env("DB_POOL_SIZE", :integer)
-     10
+      # export DB_POOL_SIZE=10
+      iex> CozyEnv.get_env("DB_POOL_SIZE", :integer)
+      10
 
-     # export PERCENT=0.95
-     iex> CozyEnv.get_env("PERCENT", :float)
-     0.95
+      # export PERCENT=0.95
+      iex> CozyEnv.get_env("PERCENT", :float)
+      0.95
 
-     # export USER=billy
-     iex> CozyEnv.get_env("USER", :string)
-     "billy"
+      # export USER=billy
+      iex> CozyEnv.get_env("USER", :string)
+      "billy"
 
-     # export USER=billy
-     iex> CozyEnv.get_env("USER", :atom)
-     :billy
+      # export USER=billy
+      iex> CozyEnv.get_env("USER", :atom)
+      :billy
 
   """
   @spec get_env(String.t(), data_types()) :: result()
@@ -86,28 +86,30 @@ defmodule CozyEnv do
 
   ## Examples
 
-     iex> CozyEnv.fetch_env!("NOT_SET", :boolean)
-     nil
+      iex> CozyEnv.fetch_env!("NOT_SET", :boolean)
+      ** (CozyEnv.EnvError) environment variable NOT_SET is missing
+          (cozy_env) lib/cozy_env.ex:134: CozyEnv.fetch_env!/3
+          iex:1: (file)
 
-     # export PHX_SERVER=true
-     iex> CozyEnv.fetch_env!("PHX_SERVER", :boolean)
-     true
+      # export PHX_SERVER=true
+      iex> CozyEnv.fetch_env!("PHX_SERVER", :boolean)
+      true
 
-     # export DB_POOL_SIZE=10
-     iex> CozyEnv.fetch_env!("DB_POOL_SIZE", :integer)
-     10
+      # export DB_POOL_SIZE=10
+      iex> CozyEnv.fetch_env!("DB_POOL_SIZE", :integer)
+      10
 
-     # export PERCENT=0.95
-     iex> CozyEnv.fetch_env!("PERCENT", :float)
-     0.95
+      # export PERCENT=0.95
+      iex> CozyEnv.fetch_env!("PERCENT", :float)
+      0.95
 
-     # export USER=billy
-     iex> CozyEnv.fetch_env!("USER", :string)
-     "billy"
+      # export USER=billy
+      iex> CozyEnv.fetch_env!("USER", :string)
+      "billy"
 
-     # export USER=billy
-     iex> CozyEnv.fetch_env!("USER", :atom)
-     :billy
+      # export USER=billy
+      iex> CozyEnv.fetch_env!("USER", :atom)
+      :billy
 
   """
   @spec fetch_env!(String.t(), data_types(), options()) :: result()
