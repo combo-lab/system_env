@@ -1,7 +1,7 @@
 defmodule CozyEnv.MixProject do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.2.1"
   @description "Helpers for handling OS environment variables."
   @source_url "https://github.com/cozy-elixir/cozy_env"
 
