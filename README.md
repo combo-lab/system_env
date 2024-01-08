@@ -6,9 +6,10 @@
 
 > Helpers for handling OS environment variables.
 
-It helps to provide:
+It helps to:
 
-- user-friendly error messages
+- cast values of environment variables
+- provide user-friendly error messages
 - ...
 
 ## Installation

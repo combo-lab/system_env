@@ -2,10 +2,10 @@ defmodule CozyEnv do
   @moduledoc """
   Helpers for handling OS environment variables.
 
-  It helps to provide:
+  It helps to:
 
-    * user-friendly error messages
-    * ...
+    * cast values of environment variables
+    * provide user-friendly error messages
 
   """
 
@@ -163,11 +163,11 @@ defmodule CozyEnv do
 
   @doc false
   def to_integer(varname, value) do
-    try do
-      String.to_integer(value)
-    rescue
-      ArgumentError ->
-        # credo:disable-for-next-line
+    case Integer.parse(value) do
+      {integer, ""} ->
+        integer
+
+      _ ->
         raise EnvError,
               "environment variable #{varname} is provided, but the value " <>
                 "#{inspect(value)} is not the string representation of an integer"
@@ -181,7 +181,6 @@ defmodule CozyEnv do
         float
 
       _ ->
-        # credo:disable-for-next-line
         raise EnvError,
               "environment variable #{varname} is provided, but the value " <>
                 "#{inspect(value)} is not the string representation of a float"
