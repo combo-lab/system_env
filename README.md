@@ -3,9 +3,9 @@
 [![CI](https://github.com/combo-lab/system_env/actions/workflows/ci.yml/badge.svg)](https://github.com/combo-lab/system_env/actions/workflows/ci.yml)
 [![Hex.pm](https://img.shields.io/hexpm/v/system_env.svg)](https://hex.pm/packages/system_env)
 
-> Helpers for handling OS environment variables.
+Helpers for handling OS environment variables.
 
-It helps to:
+## Features
 
 - cast values of environment variables
 - provide user-friendly error messages
@@ -18,7 +18,7 @@ Add `:system_env` to the list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:system_env, <requirement>}
+    {:system_env, "<requirement>"}
   ]
 end
 ```
