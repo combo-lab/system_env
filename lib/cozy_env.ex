@@ -1,4 +1,4 @@
-defmodule CozyEnv do
+defmodule SystemEnv do
   @moduledoc """
   Helpers for handling OS environment variables.
 
@@ -9,7 +9,7 @@ defmodule CozyEnv do
 
   """
 
-  alias CozyEnv.EnvError
+  alias SystemEnv.EnvError
 
   @type data_type ::
           :boolean
@@ -43,27 +43,27 @@ defmodule CozyEnv do
 
   ## Examples
 
-      iex> CozyEnv.get_env("NOT_SET", :boolean)
+      iex> SystemEnv.get_env("NOT_SET", :boolean)
       nil
 
       # export PHX_SERVER=true
-      iex> CozyEnv.get_env("PHX_SERVER", :boolean)
+      iex> SystemEnv.get_env("PHX_SERVER", :boolean)
       true
 
       # export DB_POOL_SIZE=10
-      iex> CozyEnv.get_env("DB_POOL_SIZE", :integer)
+      iex> SystemEnv.get_env("DB_POOL_SIZE", :integer)
       10
 
       # export PERCENT=0.95
-      iex> CozyEnv.get_env("PERCENT", :float)
+      iex> SystemEnv.get_env("PERCENT", :float)
       0.95
 
       # export USER=billy
-      iex> CozyEnv.get_env("USER", :string)
+      iex> SystemEnv.get_env("USER", :string)
       "billy"
 
       # export USER=billy
-      iex> CozyEnv.get_env("USER", :atom)
+      iex> SystemEnv.get_env("USER", :atom)
       :billy
 
   """
@@ -89,29 +89,29 @@ defmodule CozyEnv do
 
   ## Examples
 
-      iex> CozyEnv.fetch_env!("NOT_SET", :boolean)
-      ** (CozyEnv.EnvError) environment variable NOT_SET is missing
-          (cozy_env) lib/cozy_env.ex:134: CozyEnv.fetch_env!/3
+      iex> SystemEnv.fetch_env!("NOT_SET", :boolean)
+      ** (SystemEnv.EnvError) environment variable NOT_SET is missing
+          (system_env) lib/system_env.ex:134: SystemEnv.fetch_env!/3
           iex:1: (file)
 
       # export PHX_SERVER=true
-      iex> CozyEnv.fetch_env!("PHX_SERVER", :boolean)
+      iex> SystemEnv.fetch_env!("PHX_SERVER", :boolean)
       true
 
       # export DB_POOL_SIZE=10
-      iex> CozyEnv.fetch_env!("DB_POOL_SIZE", :integer)
+      iex> SystemEnv.fetch_env!("DB_POOL_SIZE", :integer)
       10
 
       # export PERCENT=0.95
-      iex> CozyEnv.fetch_env!("PERCENT", :float)
+      iex> SystemEnv.fetch_env!("PERCENT", :float)
       0.95
 
       # export USER=billy
-      iex> CozyEnv.fetch_env!("USER", :string)
+      iex> SystemEnv.fetch_env!("USER", :string)
       "billy"
 
       # export USER=billy
-      iex> CozyEnv.fetch_env!("USER", :atom)
+      iex> SystemEnv.fetch_env!("USER", :atom)
       :billy
 
   """
@@ -194,6 +194,6 @@ defmodule CozyEnv do
   def to_atom(_varname, value), do: String.to_atom(value)
 end
 
-defmodule CozyEnv.EnvError do
+defmodule SystemEnv.EnvError do
   defexception [:message]
 end

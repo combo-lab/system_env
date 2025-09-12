@@ -1,13 +1,13 @@
-defmodule CozyEnv.MixProject do
+defmodule SystemEnv.MixProject do
   use Mix.Project
 
   @version "0.2.1"
   @description "Helpers for handling OS environment variables."
-  @source_url "https://github.com/cozy-elixir/cozy_env"
+  @source_url "https://github.com/combo-lab/system_env"
 
   def project do
     [
-      app: :cozy_env,
+      app: :system_env,
       version: @version,
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
