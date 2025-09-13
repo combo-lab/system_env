@@ -3,9 +3,9 @@ defmodule SystemEnvTest do
 
   setup context do
     if env = context[:env] do
-      {varname, value} = env
-      System.put_env(varname, value)
-      on_exit(fn -> System.delete_env(varname) end)
+      {name, value} = env
+      System.put_env(name, value)
+      on_exit(fn -> System.delete_env(name) end)
     end
 
     :ok

@@ -68,11 +68,11 @@ defmodule SystemEnv do
 
   """
   @spec get_env(String.t(), data_type()) :: result()
-  def get_env(varname, type)
-      when is_binary(varname) and type in @supported_types do
-    case System.fetch_env(varname) do
+  def get_env(name, type)
+      when is_binary(name) and type in @supported_types do
+    case System.fetch_env(name) do
       {:ok, value} ->
-        apply(__MODULE__, :"to_#{type}", [varname, value])
+        apply(__MODULE__, :"to_#{type}", [name, value])
 
       :error ->
         nil
@@ -80,7 +80,7 @@ defmodule SystemEnv do
   end
 
   @spec get_env(String.t()) :: String.t()
-  def get_env(varname), do: get_env(varname, :string)
+  def get_env(name), do: get_env(name, :string)
 
   @doc """
   Gets the value of the given environment variable, and casts it into given type.
@@ -125,14 +125,14 @@ defmodule SystemEnv do
 
   """
   @spec fetch_env!(String.t(), data_type(), options()) :: result()
-  def fetch_env!(varname, type, opts)
-      when is_binary(varname) and type in @supported_types and is_list(opts) do
-    case System.fetch_env(varname) do
+  def fetch_env!(name, type, opts)
+      when is_binary(name) and type in @supported_types and is_list(opts) do
+    case System.fetch_env(name) do
       {:ok, value} ->
-        apply(__MODULE__, :"to_#{type}", [varname, value])
+        apply(__MODULE__, :"to_#{type}", [name, value])
 
       :error ->
-        default_message = "environment variable #{varname} is missing"
+        default_message = "environment variable #{name} is missing"
         extra_message = Keyword.get(opts, :message)
 
         message =
@@ -149,60 +149,60 @@ defmodule SystemEnv do
     end
   end
 
-  def fetch_env!(varname, type_or_opts)
+  def fetch_env!(name, type_or_opts)
 
   @spec fetch_env!(String.t(), data_type()) :: result()
-  def fetch_env!(varname, type) when is_binary(varname) and is_atom(type) do
-    fetch_env!(varname, type, [])
+  def fetch_env!(name, type) when is_binary(name) and is_atom(type) do
+    fetch_env!(name, type, [])
   end
 
   @spec fetch_env!(String.t(), options()) :: String.t()
-  def fetch_env!(varname, opts) when is_binary(varname) and is_list(opts) do
-    fetch_env!(varname, :string, opts)
+  def fetch_env!(name, opts) when is_binary(name) and is_list(opts) do
+    fetch_env!(name, :string, opts)
   end
 
   @spec fetch_env!(String.t()) :: String.t()
-  def fetch_env!(varname) when is_binary(varname) do
-    fetch_env!(varname, :string, [])
+  def fetch_env!(name) when is_binary(name) do
+    fetch_env!(name, :string, [])
   end
 
   @doc false
-  def to_boolean(_varname, "false"), do: false
-  def to_boolean(_varname, "0"), do: false
-  def to_boolean(_varname, ""), do: false
-  def to_boolean(_varname, _), do: true
+  def to_boolean(_name, "false"), do: false
+  def to_boolean(_name, "0"), do: false
+  def to_boolean(_name, ""), do: false
+  def to_boolean(_name, _), do: true
 
   @doc false
-  def to_integer(varname, value) do
+  def to_integer(name, value) do
     case Integer.parse(value) do
       {integer, ""} ->
         integer
 
       _ ->
         raise EnvError,
-              "environment variable #{varname} is provided, but the value " <>
+              "environment variable #{name} is provided, but the value " <>
                 "#{inspect(value)} is not the string representation of an integer"
     end
   end
 
   @doc false
-  def to_float(varname, value) do
+  def to_float(name, value) do
     case Float.parse(value) do
       {float, ""} ->
         float
 
       _ ->
         raise EnvError,
-              "environment variable #{varname} is provided, but the value " <>
+              "environment variable #{name} is provided, but the value " <>
                 "#{inspect(value)} is not the string representation of a float"
     end
   end
 
   @doc false
-  def to_string(_varname, value), do: value
+  def to_string(_name, value), do: value
 
   @doc false
-  def to_atom(_varname, value), do: String.to_atom(value)
+  def to_atom(_name, value), do: String.to_atom(value)
 end
 
 defmodule SystemEnv.EnvError do
