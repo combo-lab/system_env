@@ -114,6 +114,15 @@ defmodule SystemEnv do
       iex> SystemEnv.fetch_env!("USER", :atom)
       :billy
 
+      # pass extra message
+      iex> SystemEnv.fetch_env!(
+      ...>   "DATABASE_URL",
+      ...>   "Set it to something like: ecto://USER:PASS@HOST/DATABASE"
+      ...> )
+      ** (SystemEnv.EnvError) environment variable DATABASE_URL is missing. Set it to something like: ecto://USER:PASS@HOST/DATABASE
+          (system_env) lib/system_env.ex:134: SystemEnv.fetch_env!/3
+          iex:1: (file)
+
   """
   @spec fetch_env!(String.t(), data_type(), options()) :: result()
   def fetch_env!(varname, type, opts)
@@ -139,6 +148,8 @@ defmodule SystemEnv do
         raise EnvError, message
     end
   end
+
+  def fetch_env!(varname, type_or_opts)
 
   @spec fetch_env!(String.t(), data_type()) :: result()
   def fetch_env!(varname, type) when is_binary(varname) and is_atom(type) do
